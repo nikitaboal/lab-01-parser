@@ -1,3 +1,4 @@
+// Copyright 2021 Nikita Boldaev <nikbold-02@yandex.ru>
 #include <header.hpp>
 
 using json = nlohmann::json;
