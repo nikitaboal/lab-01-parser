@@ -1,7 +1,7 @@
 // Copyright 2021 Nikita Boldaev <nikbold-02@yandex.ru>
 
-#ifndef INCLUDE_HEADER_HPP_
-#define INCLUDE_HEADER_HPP_
+#ifndef INCLUDE_STUDENT_HPP_
+#define INCLUDE_STUDENT_HPP_
 
 #include <string>
 #include <vector>
@@ -38,4 +38,4 @@ col_widths table_params(const std::vector<student_t>& students);
 void Print(const std::vector<student_t>& students,
            std::ostream& ostr = std::cout);
 
-#endif // INCLUDE_HEADER_HPP_
+#endif // INCLUDE_STUDENT_HPP_
