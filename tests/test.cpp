@@ -1,7 +1,7 @@
 // Copyright 2021 Nikita Boldaev <nikbold-02@yandex.ru>
 
 #include <gtest/gtest.h>
-#include "header.hpp"
+#include "student.hpp"
 
 TEST(ParserTest, rightFile) {
   auto students = parse_json_file("/home/user/CLionProjects/lab-01-parser/tests/jsons/exmpl.json");
