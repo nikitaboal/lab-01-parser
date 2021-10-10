@@ -2,8 +2,6 @@ os: linux
 language: minimal
 services:
   - docker
-before_install:
-   - docker build -t nikitaboal/lab-01-parcer -f Dockerfile .
 
 jobs:
   include:
