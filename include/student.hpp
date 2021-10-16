@@ -38,4 +38,4 @@ col_widths table_params(const std::vector<student_t>& students);
 void Print(const std::vector<student_t>& students,
            std::ostream& ostr = std::cout);
 
-#endif
+#endif // INCLUDE_STUDENT_HPP_

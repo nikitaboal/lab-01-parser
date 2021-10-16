@@ -4,8 +4,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_TESTS "Build tests" ON)
-option(BUILD_DOCS "Build documentation" OFF)
-option(BUILD_COVERAGE "Build code coverage" OFF)
+option(BUILD_DOCS "Build documentation" ON)
+option(BUILD_COVERAGE "Build code coverage" ON)
 
 set(
         HUNTER_CACHE_SERVERS
@@ -34,7 +34,6 @@ find_package(nlohmann_json CONFIG REQUIRED)
 
 
 add_library(${PROJECT_NAME} STATIC
-        # enum your files and delete this comment
         ${CMAKE_CURRENT_SOURCE_DIR}/sources/source.cpp
         include/student.hpp)
 
@@ -45,13 +44,12 @@ add_executable(demo
 
 target_link_libraries(${PROJECT_NAME} nlohmann_json::nlohmann_json)
 target_link_libraries(demo nlohmann_json::nlohmann_json)
+target_link_libraries(demo ${PROJECT_NAME})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
         "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
         "$<INSTALL_INTERFACE:include>"
         )
-
-target_link_libraries(demo ${PROJECT_NAME})
 
 if(BUILD_TESTS)
     add_executable(tests
@@ -67,10 +65,6 @@ if(BUILD_COVERAGE)
     set(ENABLE_COVERAGE ON CACHE BOOL "Enable coverage build." FORCE)
     list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tools/coverage/cmake")
     find_package(codecov)
-
-    hunter_add_package(nlohmann_json)
-    find_package(nlohmann_json CONFIG REQUIRED)
-
     string(APPEND CMAKE_CXX_FLAGS " --coverage")
     add_coverage(${PROJECT_NAME})
     add_coverage(tests)
