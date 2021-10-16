@@ -13,6 +13,4 @@ using json = nlohmann::json;
       throw std::invalid_argument("Expected a path for a *.json file");
     }
     return 0;
-//gdfsjk
-    //jsd
 }

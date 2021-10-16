@@ -1,3 +1,4 @@
+// Copyright 2021 Nikita Boldaev <nikbold-02@yandex.ru>
 #include <student.hpp>
 
 auto get_name(const nlohmann::json& j) -> std::string {
@@ -15,7 +16,7 @@ auto get_debt(const nlohmann::json& j) -> std::any {
   else if (j.is_array())
     return j.get<std::vector<std::string> >();
   else
-    throw std::invalid_argument("Expected string or array of strings for debt");
+    throw std::invalid_argument("Expected string or array of strings in debt");
 }
 
 auto get_avg(const nlohmann::json& j) -> std::any {
@@ -28,7 +29,7 @@ auto get_avg(const nlohmann::json& j) -> std::any {
   else if (j.is_number_unsigned())
     return j.get<std::size_t>();
   else
-    throw std::invalid_argument("Expected string, double or unsigned value for avg");
+    throw std::invalid_argument("Expected str or double in avg");
 }
 
 auto get_group(const nlohmann::json& j) -> std::any {
@@ -37,7 +38,7 @@ auto get_group(const nlohmann::json& j) -> std::any {
   else if  (j.is_number_unsigned())
     return j.get<std::size_t>();
   else
-    throw std::invalid_argument("Expected string or unsigned value for group");
+    throw std::invalid_argument("Expected string or unsigned value in group");
 }
 
 auto get_str_group(const std::any& group) -> std::string {
@@ -81,6 +82,9 @@ void from_json(const nlohmann::json& j, student_t& s) {
 }
 
 std::vector<student_t> parse_json_file(const std::string& path){
+  if (path.empty()){
+    throw std::runtime_error("Excepted a path to json file");
+  }
   std::ifstream file(path);
 
   if (!file) {
@@ -91,7 +95,7 @@ std::vector<student_t> parse_json_file(const std::string& path){
   file >> data;
 
   if (!(data["items"].is_array())) {
-    throw std::runtime_error("Items is not array!");
+    throw std::runtime_error("Items is not array");
   }
   if (data["items"].size() != (data["_meta"])["count"]) {
     throw std::runtime_error("Items and meta doesn't match.");
