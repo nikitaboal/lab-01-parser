@@ -4,8 +4,8 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_TESTS "Build tests" ON)
-option(BUILD_DOCS "Build documentation" ON)
-option(BUILD_COVERAGE "Build code coverage" ON)
+option(BUILD_DOCS "Build documentation" OFF)
+option(BUILD_COVERAGE "Build code coverage" OFF)
 
 set(
         HUNTER_CACHE_SERVERS
@@ -57,6 +57,12 @@ if(BUILD_TESTS)
             ${CMAKE_CURRENT_SOURCE_DIR}/tests/test.cpp
             include/student.hpp)
     target_link_libraries(tests ${PROJECT_NAME} GTest::gtest_main)
+    add_custom_command(TARGET tests PRE_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_CURRENT_SOURCE_DIR}/tests/jsons
+            $<TARGET_FILE_DIR:tests>
+            )
+    add_definitions("-DRES_DIR=\"${CMAKE_SOURCE_DIR}/tests/jsons/\"")
     enable_testing()
     add_test(NAME unit_tests COMMAND tests)
 endif()
