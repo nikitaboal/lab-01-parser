@@ -4,7 +4,7 @@
 #include "student.hpp"
 
 TEST(ParserTest, rightFile) {
-  auto students = parse_json_file(RES_DIR"exmpl.json");
+  auto students = parse_json_file(JSON_PATH"exmpl.json");
   std::stringstream parsed;
   Print(students, parsed);
   std::string compare =
@@ -21,25 +21,25 @@ TEST(ParserTest, rightFile) {
 }
 
 TEST(ParserTest, wrongMeta) {
-  EXPECT_THROW(parse_json_file(RES_DIR"meta.json"), std::runtime_error);
+  EXPECT_THROW(parse_json_file(JSON_PATH"meta.json"), std::runtime_error);
 }
 
 TEST(ParserTest, notArray) {
-  EXPECT_THROW(parse_json_file(RES_DIR"array.json"), std::runtime_error);
+  EXPECT_THROW(parse_json_file(JSON_PATH"array.json"), std::runtime_error);
 }
 
 TEST(ParserTest, wrongName) {
-    EXPECT_THROW(parse_json_file(RES_DIR"name.json"),std::invalid_argument);
+    EXPECT_THROW(parse_json_file(JSON_PATH"name.json"),std::invalid_argument);
 }
 
 TEST(ParserTest, wrongGroup) {
-  EXPECT_THROW(parse_json_file(RES_DIR"group.json"), std::invalid_argument);
+  EXPECT_THROW(parse_json_file(JSON_PATH"group.json"), std::invalid_argument);
 }
 
 TEST(ParserTest, wrongAvg) {
-  EXPECT_THROW(parse_json_file(RES_DIR"avg.json"), std::invalid_argument);
+  EXPECT_THROW(parse_json_file(JSON_PATH"avg.json"), std::invalid_argument);
 }
 
 TEST(ParserTest, wrongDebt) {
-  EXPECT_THROW(parse_json_file(RES_DIR"debt.json"), std::invalid_argument);
+  EXPECT_THROW(parse_json_file(JSON_PATH"debt.json"), std::invalid_argument);
 }

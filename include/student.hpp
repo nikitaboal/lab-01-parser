@@ -10,7 +10,6 @@
 #include <any>
 #include <nlohmann/json.hpp>
 #include <fstream>
-#include <sstream>
 #include <iomanip>
 
 
@@ -27,10 +26,6 @@ struct col_widths{
   int avg_width;
   int debt_width;
 };
-
-auto get_str_group(const std::any& group) -> std::string;
-auto get_str_avg(const std::any& avg)     -> std::string;
-auto get_str_debt(const std::any& debt)   -> std::string;
 
 std::vector<student_t> parse_json_file(const std::string& path);
 
